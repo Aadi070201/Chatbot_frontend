@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #050014;
+  --panel: #0c0420;
+  --accent: #8f00ff;
+  --neon: #00ffff;
+  --text: #f8f9ff;
+}
+
+html, body, #__next {
+  height: 100%;
+  background: radial-gradient(circle at 20% 30%, #090033, #000);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.message {
+  background: var(--panel);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 10px rgba(143, 0, 255, 0.3);
+  transition: transform 0.2s;
+}
+.message:hover {
+  transform: scale(1.02);
+}
+
+.aadi {
+  background: linear-gradient(135deg, var(--accent), var(--neon));
+  color: #000;
+  align-self: flex-start;
+}
+.user {
+  background: rgba(255,255,255,0.1);
+  align-self: flex-end;
+}
+
+.input-panel {
+  display: flex;
+  margin-top: auto;
+  background: var(--panel);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 0 10px rgba(0,255,255,0.3);
+}
+
+input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  outline: none;
+  padding: 0.75rem;
+}
+
+button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  transition: background 0.3s;
+}
+button:hover {
+  background: var(--neon);
+  color: #000;
+}
