@@ -30,14 +30,11 @@ export default function Chat() {
     ]);
 
     try {
-      const r = await fetch(
-        (process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000") + "/chat",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query, k: 5 }),
-        }
-      );
+      const r = await fetch("https://nutrition-chatbot-vrgk.onrender.com/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query, k: 5 }),
+      });
 
       const text = await r.text();
       let data: any = {};
