@@ -1,16 +1,14 @@
 {
-  "name": "longevai-rag-frontend",
+  "name": "chatbot-frontend",
   "private": true,
   "version": "0.1.0",
   "type": "module",
- {
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start",  
+    "start": "next start",
     "lint": "next lint"
-  }
-}
+  },
   "dependencies": {
     "autoprefixer": "10.4.20",
     "next": "14.2.5",
@@ -25,5 +23,3 @@
     "typescript": "5.5.4"
   }
 }
-
-
