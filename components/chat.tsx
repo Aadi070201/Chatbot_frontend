@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from "react";
 
 type Msg = { sender: "user" | "aadi" | "error"; text: string };
 
+// Read API base from env (works for ngrok / Render / local), remove trailing slash if any
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000").replace(/\/+$/, "");
+
 export default function Chat() {
   const [q, setQ] = useState("");
   const [msg, setMsg] = useState<Msg[]>([]);
@@ -30,8 +33,9 @@ export default function Chat() {
     ]);
 
     try {
-      const r = await fetch("https://nutrition-chatbot-vrgk.onrender.com/chat", {
+      const r = await fetch(`${API_BASE}/chat`, {
         method: "POST",
+        mode: "cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query, k: 5 }),
       });
@@ -74,16 +78,17 @@ export default function Chat() {
         {msg.map((m, i) => (
           <div
             key={i}
-            className={`flex ${
-              m.sender === "user" ? "justify-end" : "justify-start"
-            }`}
+            className={`flex ${m.sender === "user" ? "justify-end" : "justify-start"}`}
           >
             <div className="flex flex-col max-w-[80%]">
               {/* small sender label for clarity */}
               <span
                 className={`mb-1 text-[11px] tracking-wide ${
-                  m.sender === "user" ? "text-cyan-300 text-right" : 
-                  m.sender === "aadi" ? "text-fuchsia-300" : "text-rose-300"
+                  m.sender === "user"
+                    ? "text-cyan-300 text-right"
+                    : m.sender === "aadi"
+                    ? "text-fuchsia-300"
+                    : "text-rose-300"
                 }`}
               >
                 {m.sender === "user" ? "You" : m.sender === "aadi" ? "Aadi" : "Error"}
@@ -96,7 +101,7 @@ export default function Chat() {
                     ? "bg-gradient-to-r from-fuchsia-600 to-cyan-500 text-white self-end"
                     : m.sender === "aadi"
                     ? "bg-slate-800/80 border border-slate-700 text-slate-100 self-start"
-                    : "bg-[#3b0d20] border border-[#703348] text-[#ffd9e2] self-start"
+                    : "bg-[#3b0d20] border border-[#703348] text-[#ffd9e2] self-start",
                 ].join(" ")}
               >
                 {m.text}
